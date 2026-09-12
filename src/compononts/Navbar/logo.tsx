@@ -1,6 +1,6 @@
 import React from 'react'
 
-import logo from '../../assets/logo-text.png'
+import logon from '../../assets/logo-text.png'
 
 function logo() {
   return (

@@ -18,131 +18,152 @@ const navLinks: NavItem[] = [
 
 export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Active navigation link
   const [activeLink, setActiveLink] = useState('Home');
 
+  const handleLinkClick = (name: string) => {
+    setActiveLink(name);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md text-white px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur-md sm:px-6">
 
-        {/* Logo */}
-        <a
-          href="#home"
-          onClick={() => setActiveLink('Home')}
-          className="flex items-center"
-        >
-          <img
-            src={logo}
-            alt="DevStack Logo"
-            className="w-auto h-10 object-contain"
-          />
-        </a>
+      <div className="mx-auto max-w-7xl">
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <a
-                href={link.href}
-                onClick={() => setActiveLink(link.name)}
-                className={`transition-colors duration-200 ${
-                  activeLink === link.name
-                    ? 'text-red-500'
-                    : 'text-black hover:text-gray-300'
-                }`}
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+     
+        <div className="relative flex h-12 items-center md:hidden">
 
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex items-center gap-3">
-
-          {/* Sign In */}
-          <a
-            href="#signin"
-            className="px-4 py-2 text-black "
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-1 text-slate-700 transition hover:text-slate-900 focus:outline-none"
+            aria-label="Toggle Navigation"
+            aria-expanded={isMobileMenuOpen}
           >
-            Sign In
+            {isMobileMenuOpen ? (
+              <X size={24} />
+            ) : (
+              <Menu size={24} />
+            )}
+          </button>
+
+          <a
+            href="#home"
+            onClick={() => handleLinkClick('Home')}
+            className="absolute left-1/2 flex -translate-x-1/2 items-center"
+          >
+            <img
+              src={logo}
+              alt="DevStack Logo"
+              className="h-9 w-auto object-contain"
+            />
           </a>
 
-          {/* Sign Up */}
-          <a
-            href="#signup"
-            className="px-5 py-2 bg-[#D91B7E] rounded-full font-medium transition-colors"
-          >
-            Sign Up
-          </a>
+          <div className="ml-auto flex items-center gap-2">
 
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-gray-300 hover:text-white"
-          aria-label="Toggle Menu"
-        >
-          {isMobileMenuOpen ? (
-            <X size={24} />
-          ) : (
-            <Menu size={24} />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden mt-5 border-t border-gray-800 pt-5">
-
-          {/* Mobile Links */}
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => {
-                  setActiveLink(link.name);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`transition-colors duration-200 ${
-                  activeLink === link.name
-                    ? 'text-red-500'
-                    : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Buttons */}
-          <div className="flex flex-col gap-3 mt-6">
-
-            {/* Sign In */}
             <a
               href="#signin"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 border border-gray-700 rounded-lg text-gray-300 hover:text-white hover:border-gray-500 transition"
+              className="text-xs font-medium text-slate-700 transition hover:text-[#D91B7E] sm:text-sm"
             >
               Sign In
             </a>
 
-            {/* Sign Up */}
             <a
               href="#signup"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition"
+              className="rounded-full bg-[#D91B7E] px-3 py-1.5 text-xs font-medium text-white transition hover:opacity-90 sm:px-4 sm:text-sm"
             >
               Sign Up
             </a>
 
           </div>
         </div>
-      )}
+
+        {/* =========================================
+            DESKTOP HEADER
+        ========================================= */}
+        <div className="hidden h-12 grid-cols-3 items-center md:grid">
+
+          <div className="flex justify-start">
+            <a
+              href="#home"
+              onClick={() => handleLinkClick('Home')}
+              className="flex items-center"
+            >
+              <img
+                src={logo}
+                alt="DevStack Logo"
+                className="h-10 w-auto object-contain"
+              />
+            </a>
+          </div>
+
+          <ul className="flex items-center justify-center gap-7">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  onClick={() => setActiveLink(link.name)}
+                  className={`whitespace-nowrap text-sm font-medium transition-colors duration-200 ${
+                    activeLink === link.name
+                      ? 'text-[#D91B7E]'
+                      : 'text-slate-700 hover:text-[#D91B7E]'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+      
+          <div className="flex items-center justify-end gap-3">
+
+            <a
+              href="#signin"
+              className="px-4 py-2 text-sm font-medium text-slate-700 transition hover:text-[#D91B7E]"
+            >
+              Sign In
+            </a>
+
+            <a
+              href="#signup"
+              className="rounded-full bg-[#D91B7E] px-5 py-2 text-sm font-medium text-white transition hover:opacity-90"
+            >
+              Sign Up
+            </a>
+
+          </div>
+        </div>
+
+        {/* =========================================
+            MOBILE MENU
+        ========================================= */}
+        {isMobileMenuOpen && (
+          <div className="border-t border-slate-200 py-4 md:hidden">
+
+            <nav className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`block py-1 text-sm font-medium transition-colors duration-200 ${
+                    activeLink === link.name
+                      ? 'text-[#D91B7E]'
+                      : 'text-slate-600 hover:text-[#D91B7E]'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+
+          </div>
+        )}
+
+      </div>
     </nav>
   );
 };

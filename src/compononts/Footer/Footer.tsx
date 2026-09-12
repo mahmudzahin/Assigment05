@@ -12,21 +12,21 @@ import { ArrowUpRight } from 'lucide-react';
 export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-900">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:py-14 lg:px-8">
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
+        {/* Main Footer */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-5 lg:gap-12">
 
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2 lg:col-span-2">
 
-            {/* Logo + Name */}
-            <div className="flex items-center gap-3">
+            {/* Logo */}
+            <div className="flex items-center">
               <img
                 src={logo}
                 alt="DevStack Logo"
-                className="h-auto w-auto rounded-xl object-contain"
+                className="h-auto w-auto max-w-[180px] object-contain"
               />
-
             </div>
 
             {/* Description */}
@@ -38,6 +38,7 @@ export const Footer: React.FC = () => {
             {/* Social Links */}
             <div className="mt-6 flex items-center gap-3">
 
+              {/* GitHub */}
               <a
                 href="#github"
                 aria-label="GitHub"
@@ -46,6 +47,7 @@ export const Footer: React.FC = () => {
                 <FaGithub size={18} />
               </a>
 
+              {/* X */}
               <a
                 href="#twitter"
                 aria-label="X / Twitter"
@@ -54,6 +56,7 @@ export const Footer: React.FC = () => {
                 <FaXTwitter size={17} />
               </a>
 
+              {/* LinkedIn */}
               <a
                 href="#linkedin"
                 aria-label="LinkedIn"
@@ -167,7 +170,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
 
           <p className="text-sm text-slate-500">
             © 2026 DevStack. All rights reserved.
